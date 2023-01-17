@@ -55,7 +55,7 @@ void Ticket::bookTicket()
         }
         bus.close();
 
-        if (check == 0)
+        if (check == FALSE)
         {
             cout << "\n\tNo Buses Found...!!\n";
         }
@@ -75,7 +75,9 @@ void Ticket::bookTicket()
                     if (b.getBookedSeats() >= 32)
                     {
                         cout << "\n\tSeat not available...!!\n";
-                        break;
+                        cout<<"\nPress enter to continue..";
+                        getchar();
+                         break;
                     }
                     else
                     {
@@ -95,6 +97,7 @@ void Ticket::bookTicket()
                         cout<<"\n---------BOOKING DETAILS-------------";
                         displayTicket();
                         cout << "\n\tTicket Booked Successfully...!!\n";
+                        getchar();
                     }
                 }
                 else
@@ -104,7 +107,7 @@ void Ticket::bookTicket()
                 bus.read((char *)&b, sizeof(b));
             }
 
-            if (booked == 1)
+            if (booked == TRUE)
             {
                 bus.close();
                 temp.close();
@@ -112,6 +115,8 @@ void Ticket::bookTicket()
                 rename("temp.txt", "buses.txt");
             }
         }
+         cout<<"\nPress enter to continue..";
+        getchar();
         bus.close();
     }
     LOG_INFO("\nBook Ticket");
@@ -143,7 +148,7 @@ void Ticket::editTicket()
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(getPnrNo(), pnr) == 0)
+            if (strcmp(getPnrNo(), pnr) == FALSE)
             {
                 system("clear");
                 cout<<"\n---------------EDIT TICKET-------------";
@@ -161,15 +166,19 @@ void Ticket::editTicket()
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check = 1)
+        if (check == TRUE)
         {
             cout << "\n\tTicket Updated Successfully...!!\n";
+            getchar();
         }
         else
         {
             cout << "\n\tTicket Not Found...!!\n";
+            cout<<"\nPress any key to continue..";
+            getchar();
         }
-
+        cout<<"\nPress enter to continue...";
+        getchar();
         ticket.close();
         temp.close();
         remove("tickets.txt");
@@ -184,7 +193,7 @@ void Ticket::displayTicket()
     cout << "\n-----------DISPLAY TICKET-------------\n";
     cout << "\n\t Name:-> " << getName();
     cout << "\n\t PNR No:-> " << getPnrNo();
-    cout << "\n\t Bus No:-> " << bus.getBusNo();
+     cout << "\n\t Bus No:-> " << bus.getBusNo();
     cout << "\n\t Seat No.:-> " << bus.getBookedSeats();
     cout << "\n\t Date:-> " << getDate();
     cout << "\n\t Source:-> " << bus.getSource();
@@ -193,6 +202,8 @@ void Ticket::displayTicket()
     cout << "\n\t Destination Time:-> " << bus.getDestinationTime();
     cout << fixed << setprecision(2);
     cout << "\n\t Bus Fare:-> " << bus.getBusFare();
+    cout<<"\nPress enter to continue...";
+    getchar();
     LOG_INFO("\nDisplay Ticket");
     cout << "\n";
 }
@@ -221,7 +232,7 @@ void Ticket::cancelTicket()
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(getPnrNo(), pnr) != 0)
+             if (strcmp(getPnrNo(), pnr) != 0)
             {
                 temp.write((char *)this, sizeof(*this));
             }
@@ -233,7 +244,7 @@ void Ticket::cancelTicket()
                 bus.read((char *)&b, sizeof(b));
                 while (!bus.eof())
                 {
-                    if (strcmp(b.getBusNo(), b.getBusNo()) == 0)
+                    if (strcmp(b.getBusNo(), b.getBusNo()) == FALSE)
                     {
                         b.setCancelTicket();
                         busTemp.write((char *)&b, sizeof(b));
@@ -252,11 +263,13 @@ void Ticket::cancelTicket()
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check == 0)
+        if (check == TRUE)
         {
             ticket.close();
             temp.close();
             cout << "\n\tTicket Not Found...!!\n";
+            cout<<"\nPress any key to continue..";
+            getchar();
         }
         else
         {
@@ -265,9 +278,11 @@ void Ticket::cancelTicket()
             remove("tickets.txt");
             rename("temp.txt", "tickets.txt");
             cout << "\n\tTicket Cancelled...!!\n";
+            cout<<"\nPress any key to continue..";
+            getchar();
         }
     }
-    LOG_INFO("\nTicket cancel");
+    //LOG_INFO("\nTicket cancel");
 }
 
 
@@ -297,20 +312,22 @@ void Ticket::showTicketsByPNR()
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(getPnrNo(), pnr) == 0)
+            if (strcmp(getPnrNo(), pnr) == FALSE)
             {
                 displayTicket();
                 check = 1;
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check == 0)
+        if (check == FALSE)
         {
             cout << "\n\tNo Bookings...!!\n";
+            cout<<"\nPress any key to continue..";
+            getchar();
         }
         ticket.close();
     }
-    LOG_INFO("\nTicket by PNR");
+    //LOG_INFO("\nTicket by PNR");
 }
 
 // SHOW TICKET BY NAME
@@ -331,26 +348,25 @@ void Ticket::showTicketsByName()
     {
         cout << "\n\tCan't Open File...!!\n";
     }
-
     else
     {
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(getName(), n) == 0)
+            if (strcmp(getName(), n) == FALSE)
             {
                 displayTicket();
                 check = 1;
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check == 0)
+        if (check == FALSE)
         {
             cout << "\n\tNo Bookings...!!\n";
         }
         ticket.close();
     }
-    LOG_INFO("\nTicket by name");
+    //LOG_INFO("\nTicket by name");
 }
 
 // SHOW TICKET BY BUS
@@ -379,16 +395,17 @@ void Ticket::showTicketsByBus()
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(bus.getBusNo(), bNo) == 0)
+            if (strcmp(bus.getBusNo(), bNo) == FALSE)
             {
                 displayTicket();
                 check = 1;
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check == 0)
+        if (check == FALSE)
         {
             cout << "\n\tNo Bookings...!!\n";
+            getchar();
         }
         ticket.close();
     }
@@ -421,19 +438,21 @@ void Ticket::showTicketsBySource()
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(bus.getSource(), s) == 0)
+            if (strcmp(bus.getSource(), s) == FALSE)
             {
                 displayTicket();
                 check = 1;
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check == 0)
+        if (check == FALSE)
         {
             cout << "\n\tNo Bookings...!!\n";
+            getchar();
         }
         ticket.close();
     }
+
     LOG_INFO("\nTicket by source");
 }
 
@@ -449,7 +468,7 @@ void Ticket::showTicketsByDestination()
     cout<<"---SHOW BOOKINGS BY DESTINATION---";
     cout << "\n\tEnter Destination:-> ";
     cin.ignore();
-    cin.getline(d, BUFFER_SIZE);
+     cin.getline(d, BUFFER_SIZE);
     system("clear");
     cout<<"\n-----------BOOKINGS---------";
 
@@ -463,16 +482,17 @@ void Ticket::showTicketsByDestination()
         ticket.read((char *)this, sizeof(*this));
         while (!ticket.eof())
         {
-            if (strcmp(bus.getDestination(), d) == 0)
+            if (strcmp(bus.getDestination(), d) == FALSE)
             {
                 displayTicket();
                 check = 1;
             }
             ticket.read((char *)this, sizeof(*this));
         }
-        if (check == 0)
+        if (check == FALSE)
         {
             cout << "\n\tNo Bookings...!!\n";
+            getchar();
         }
         ticket.close();
     }

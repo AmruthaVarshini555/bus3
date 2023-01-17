@@ -14,7 +14,7 @@ private:
     Bus bus;
 public:
     Ticket(){
-        LOG_INFO("\nTicket Default Constructor invoked");
+        //LOG_INFO("\nTicket Default Constructor invoked");
     }
     void generateTicket(char *, Bus);
     void displayTicket();
@@ -56,7 +56,7 @@ public:
     void setName(char*);
     */
     ~Ticket(){
-        LOG_INFO("\nDestructor of ticket invoked");
+        //LOG_INFO("\nDestructor of ticket invoked");
     }
 };
 #endif // __TICKET_H__

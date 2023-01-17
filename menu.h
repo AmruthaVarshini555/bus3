@@ -9,8 +9,9 @@ class Menu
 {
     public:
         Menu(){
-            LOG_INFO("\nDefault constructor of mainmenu invoked");
+            //LOG_INFO("\nDefault constructor of mainmenu invoked");
         }
+        void design();
         void welcomeScreen();
         void mainMenu();
         void adminLogin();
@@ -20,7 +21,7 @@ class Menu
         void userMenu();
         void viewBookingsMenu();
         ~Menu(){
-            LOG_INFO("\nDestructor invoked");
+            //LOG_INFO("\nDestructor invoked");
         }
 };
 #endif /* __MENU_H__ */

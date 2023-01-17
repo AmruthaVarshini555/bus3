@@ -18,14 +18,14 @@ public:
     Bus()
     {
         strcpy(busNo, "");
-        maxSeats = 32;
-        bookedSeats = 0;
-        busFare = 0.0;
+        maxSeats = TOTALSEATS;
+        bookedSeats = BOOKEDSEATS;
+        busFare = FARE;
         strcpy(source, "");
         strcpy(destination, "");
         strcpy(sourceTime, "");
         strcpy(destinationTime, "");
-        LOG_INFO("Bus Default constructor invoked");
+        //LOG_INFO("Bus Default constructor invoked");
     }
 
     // METHODS
@@ -36,97 +36,76 @@ public:
     void deleteBus();
     void editBus();
 
-// GETTERS
-char *getBusNo()
-{
-    return busNo;
-}
+    // GETTERS
+    char *getBusNo()
+    {
+        return busNo;
+    }
 
-char *getSource()
-{
-    return source;
-}
-char *getDestination()
-{
-    return destination;
-}
-char *getSourceTime()
-{
-    return sourceTime;
-}
-char *getDestinationTime()
-{
-    return destinationTime;
-}
-int getBookedSeats()
-{
-    return bookedSeats;
-}
-int getMaxSeats()
-{
-    return maxSeats;
-}
-double getBusFare()
-{
-    return busFare;
-}
+    char *getSource()
+    {
+        return source;
+    }
+    char *getDestination()
+    {
+        return destination;
+    }
+    char *getSourceTime()
+    {
+        return sourceTime;
+    }
+    char *getDestinationTime()
+    {
+        return destinationTime;
+    }
+    int getBookedSeats()
+    {
+        return bookedSeats;
+    }
+    int getMaxSeats()
+    {
+        return maxSeats;
+    }
+    double getBusFare()
+    {
+        return busFare;
+    }
 // SETTERS
-void setBookedSeats()
-{
-    bookedSeats=bookedSeats + 1;
-}
-void setCancelTicket()
-{
-    bookedSeats=bookedSeats - 1;
-}
-void setSource(char *s)
-{
-    if (s && s[0])
-        strcpy(source, s);
-}
-void setDestination(char *d)
-{
-    if (d && d[0])
-        strcpy(destination, d);
-}
-void setSourceTime(char *s)
-{
-    //if (s && s[0])
-    if(s)
-      strcpy(sourceTime, s);
-}
-void setDestinationTime(char *d)
-{
-    //if (d && d[0])
-    if(d)
-        strcpy(destinationTime, d);
-}
-void setBusFare(double f)
-{
-    if (f)
-      busFare = f;
-}
-
- /*   // GETTERS
-    char *getBusNo();
-    char *getSource();
-    char *getDestination();
-    char *getSourceTime();
-    char *getDestinationTime();
-    int getBookedSeats();
-    int getMaxSeats();
-    double getBusFare();
-    
-    // SETTERS
-    void setBookedSeats();
-    void setCancelTicket();
-    void setSource(char*);
-    void setDestination(char *);
-    void setSourceTime(char*);
-    void setDestinationTime(char*);
-    void setBusFare(double); */
+    void setBookedSeats()
+    {
+        bookedSeats=bookedSeats + 1;
+    }
+    void setCancelTicket()
+    {
+       bookedSeats=bookedSeats - 1;
+    }
+    void setSource(char *s)
+    {
+        if (s && s[0])
+            strcpy(source, s);
+    }
+    void setDestination(char *d)
+    {
+        if (d && d[0])
+            strcpy(destination, d);
+    }
+    void setSourceTime(char *s)
+    {
+        if (s && s[0])
+            strcpy(sourceTime, s);
+    }
+    void setDestinationTime(char *d)
+    {
+        if (d && d[0])
+            strcpy(destinationTime, d);
+    }
+    void setBusFare(double f)
+    {
+        if (f)
+            busFare = f;
+    }
     ~Bus(){
-        LOG_INFO("\nBus Destructor invoked");
+        //LOG_INFO("\nBus Destructor invoked");
     }
 };
 #endif //__BUS_H__
