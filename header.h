@@ -9,7 +9,7 @@
 #define FALSE 0
 #define ADMIN 1
 #define USER 2
-#define EXIT 0
+#define EXIT 3
 #define ADDBUS 1
 #define VIEWBUS 2
 #define EDITBUS 3
